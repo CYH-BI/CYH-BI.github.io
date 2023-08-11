@@ -1,0 +1,18 @@
+# 转录组之质量控制（fastqc）
+
+本文简介：这篇文章是经过了自己学习实践出来的，参考了很多资料，`如若有大佬能指出错误，我将感激不敬`，有错误，请在评论区留言，谢谢。
+更新日期：2023年7月4号
+
+作者：CYH-BI
+
+知乎连接：[转录组之质量控制（FastQC）[学习笔记通俗易懂版\] - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/641393108)
+
+CSDN连接：[转录组之质量控制（FastQC）[学习笔记通俗易懂版\]_YHC-BI的博客-CSDN博客](https://blog.csdn.net/qq_74093550/article/details/131530092?ops_request_misc=%7B%22request%5Fid%22%3A%22168845260216782425186685%22%2C%22scm%22%3A%2220140713.130102334.pc%5Fall.%22%7D&request_id=168845260216782425186685&biz_id=&utm_medium=distribute.pc_search_result.none-task-code-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-131530092-3-null-null.142^v88^control_2,239^v2^insert_chatgpt&utm_term=转录组之质量控制)
+
+### fastqc软件简介
+
+FastQC是一个用于高通量序列数据的质量控制程序。FastQC可以读取并分析多种格式的序列数据，并且可以以交互的形式来检查几种不同的质量结果，或者创建一个可以集成到自动分析流程中的报告。该软件生成的结果是html格式文件，使用可以使用浏览器打开，非常便捷。
+
+### fastqc 软件的安装（Linux环境，不提供windows）
+
+`fastqc软件需要依靠java环境`,我这里提供两种方式安装。
