@@ -15,13 +15,16 @@
 <body>
 	<h1>自定义英语单词查询</h1>
 	<p>在这个网页中，你可以自定义一个英语单词，并查询它的中文含义。</p>
-	<label for="word">请输入要查询的英语单词：</label>
-	<input type="text" id="word" name="word">
-	<button id="search">查询</button>
+	<form>
+		<label for="word">请输入要查询的英语单词：</label>
+		<input type="text" id="word" name="word">
+		<button type="submit">查询</button>
+	</form>
 	<div id="result"></div>
 	<script>
 		$(document).ready(function() {
-			$("#search").click(function() {
+			$("#word").on("submit", function(event) {
+				event.preventDefault();
 				var word = $("#word").val();
 				$.ajax({
 					url: "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit",
