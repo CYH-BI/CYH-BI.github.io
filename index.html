@@ -1,56 +1,97 @@
-<!DOCTYPE html>  
-<html>  
-<head>  
-    <style>  
-        body {  
-            background-color: blue;  
-        }  
-        .container {  
-            text-align: center;  
-            margin-top: 50px;  
-        }  
-        input[type=text] {  
-            margin-bottom: 20px;  
-        }  
-        button {  
-            padding: 10px 20px;  
-            background-color: #4CAF50;  
-            color: white;  
-            border: none;  
-            cursor: pointer;  
-        }  
-        button:hover {  
-            background-color: #45a049;  
-        }  
-        #result {  
-            font-size: 20px;  
-            margin-top: 20px;  
-            color: white;  
-        }  
-    </style>  
-    <title>英语单词翻译器</title>  
-</head>  
-<body>  
-    <div class="container">  
-        <h1>英语单词翻译器</h1>  
-        <input type="text" id="wordInput" placeholder="输入英语单词...">  
-        <button onclick="translateWord()">查询</button>  
-        <div id="result"></div>  
-    </div>  
-  
-    <script>  
-        function translateWord() {  
-            var wordInput = document.getElementById("wordInput").value;  
-            var apiKey = "YOUR_API_KEY"; // 在这里输入你的百度翻译API密钥  
-            var url = "https://api.fanyi.baidu.com/api/trans/vip/translate?q=" + encodeURIComponent(wordInput) + "&from=en&to=zh&appid=" + apiKey;  
-            fetch(url)  
-                .then(response => response.json())  
-                .then(data => {  
-                    var result = document.getElementById("result");  
-                    result.innerHTML = data.trans_result.data[0].dst;  
-                })  
-                .catch(error => console.error(error));  
-        }  
-    </script>  
-</body>  
+<!DOCTYPE html>
+<html>
+<head>
+	<title>英语单词查询</title>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<script src="https://translate.google.com/translate_a/element.js"></script>
+	<style>
+		body {
+			background-image: url('https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/images/sunny.jpg');
+			background-size: cover;
+			background-color: #87CEFA;
+			font-family: Arial, sans-serif;
+		}
+		.container {
+			margin: 0 auto;
+			width: 80%;
+			max-width: 800px;
+			padding: 20px;
+			text-align: center;
+		}
+		.input-group {
+			margin-bottom: 20px;
+		}
+		.input-group label {
+			font-weight: bold;
+			display: block;
+			margin-bottom: 5px;
+		}
+		.input-group input {
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			background-color: #F5F5DC;
+			width: 100%;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		}
+		.input-group button {
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			background-color: #4CAF50;
+			color: #fff;
+			cursor: pointer;
+		}
+		.input-group button:hover {
+			background-color: #3e8e41;
+		}
+		.result {
+			margin-bottom: 20px;
+		}
+		.result h2 {
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+		.result p {
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="input-group">
+			<label for="word">请输入要查询的英语单词：</label>
+			<input type="text" id="word" name="word" placeholder="请输入要查询的英语单词">
+			<button id="search">查询</button>
+		</div>
+		<div class="result" id="result"></div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$("#search").click(function() {
+				var word = $("#word").val();
+				$.ajax({
+					url: "https://fanyi.baidu.com/api/trans/vip/translate",
+					dataType: "json",
+					data: {
+						q: word,
+						from: "en",
+						to: "zh",
+						appid: "2022030500000000",
+						secretKey: "1234567890abcdef1234567890abcdef",
+						nonce: "1234567890",
+						signature: "1234567890abcdef1234567890abcdef"
+					},
+					success: function(data) {
+						var meaning = data.trans_result[0].dst;
+						var result = $("#result");
+						result.empty();
+						result.append("<h2>" + meaning + "</h2>");
+					}
+				});
+			});
+		});
+	</script>
+</body>
 </html>
