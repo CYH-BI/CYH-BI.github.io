@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>自定义英语单词查询</title>
+	<title>英语单词查询</title>
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 	<script src="https://translate.google.com/translate_a/element.js"></script>
@@ -9,26 +9,67 @@
 		body {
 			background-image: url('https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/images/sunny.jpg');
 			background-size: cover;
+			background-color: #87CEFA;
+			font-family: Arial, sans-serif;
 		}
-		.google_translate_element {
-			display: inline-block;
-			margin: 10px;
+		.container {
+			margin: 0 auto;
+			width: 80%;
+			max-width: 800px;
+			padding: 20px;
+			text-align: center;
+		}
+		.input-group {
+			margin-bottom: 20px;
+		}
+		.input-group label {
+			font-weight: bold;
+			display: block;
+			margin-bottom: 5px;
+		}
+		.input-group input {
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			background-color: #F5F5DC;
+			width: 100%;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		}
+		.input-group button {
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			background-color: #4CAF50;
+			color: #fff;
+			cursor: pointer;
+		}
+		.input-group button:hover {
+			background-color: #3e8e41;
+		}
+		.result {
+			margin-bottom: 20px;
+		}
+		.result h2 {
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+		.result p {
+			margin-bottom: 10px;
 		}
 	</style>
 </head>
 <body>
-	<h1>自定义英语单词查询</h1>
-	<p>在这个网页中，你可以自定义一个英语单词，并查询它的中文含义。</p>
-	<form>
-		<label for="word">请输入要查询的英语单词：</label>
-		<input type="text" id="word" name="word">
-		<button type="submit">查询</button>
-	</form>
-	<div id="result"></div>
+	<div class="container">
+		<div class="input-group">
+			<label for="word">请输入要查询的英语单词：</label>
+			<input type="text" id="word" name="word" placeholder="请输入要查询的英语单词">
+			<button id="search">查询</button>
+		</div>
+		<div class="result" id="result"></div>
+	</div>
 	<script>
 		$(document).ready(function() {
-			$("#word").on("submit", function(event) {
-				event.preventDefault();
+			$("#search").click(function() {
 				var word = $("#word").val();
 				$.ajax({
 					url: "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit",
@@ -39,27 +80,15 @@
 							layout: google.translate.TranslateElement.InlineLayout.SIMPLE
 						}, 'google_translate_element');
 						googleTranslateElementInit();
-						var result = $("#result");
-						result.empty();
-						$.ajax({
-							url: "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit",
-							dataType: "script",
-							success: function() {
-								new google.translate.TranslateElement({
-									pageLanguage: 'en',
-									layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-								}, 'google_translate_element');
-								googleTranslateElementInit();
-								var translator = new google.translate.TranslateService();
-								translator.translate(word, {
-									to: 'zh-CN',
-									elementId: 'google_translate_element'
-								}, function(result) {
-									var meaning = result.translatedText;
-									result = $("#result");
-									result.append("<p>" + meaning + "</p>");
-								});
-							}
+						var translator = new google.translate.TranslateService();
+						translator.translate(word, {
+							to: 'zh-CN',
+							elementId: 'google_translate_element'
+						}, function(result) {
+							var meaning = result.translatedText;
+							var result = $("#result");
+							result.empty();
+							result.append("<h2>" + meaning + "</h2>");
 						});
 					}
 				});
