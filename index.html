@@ -72,24 +72,22 @@
 			$("#search").click(function() {
 				var word = $("#word").val();
 				$.ajax({
-					url: "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit",
-					dataType: "script",
-					success: function() {
-						new google.translate.TranslateElement({
-							pageLanguage: 'en',
-							layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-						}, 'google_translate_element');
-						googleTranslateElementInit();
-						var translator = new google.translate.TranslateService();
-						translator.translate(word, {
-							to: 'zh-CN',
-							elementId: 'google_translate_element'
-						}, function(result) {
-							var meaning = result.translatedText;
-							var result = $("#result");
-							result.empty();
-							result.append("<h2>" + meaning + "</h2>");
-						});
+					url: "https://fanyi.baidu.com/api/trans/vip/translate",
+					dataType: "json",
+					data: {
+						q: word,
+						from: "en",
+						to: "zh",
+						appid: "2022030500000000",
+						secretKey: "1234567890abcdef1234567890abcdef",
+						nonce: "1234567890",
+						signature: "1234567890abcdef1234567890abcdef"
+					},
+					success: function(data) {
+						var meaning = data.trans_result[0].dst;
+						var result = $("#result");
+						result.empty();
+						result.append("<h2>" + meaning + "</h2>");
 					}
 				});
 			});
