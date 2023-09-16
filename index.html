@@ -1,8 +1,28 @@
-<p>Hello 大家好</p>
-<p>我是霸都丶傲天，这是我的个人网站。 </p>
-<p>很高兴你来到这里, 你可以在以下的网站找到我</p>
-
-<ul>
-  <li> <a href="https://www.zhihu.com/people/AJLoveChina">知乎</a> </li>
-  <li> <a href="http://hejie.nigeerhuo.com">我的博客(已经不更细了,现在在知乎写文章)</a> </li>
-</ul>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>英语翻译</title>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<script src="https://translate.google.com/translate_a/element.js"></script>
+	<style>
+		.google_translate_element {
+			display: inline-block;
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>英语翻译</h1>
+	<p>在这个网页中，你可以输入要翻译的文本，并选择要翻译成的语言。</p>
+	<div id="google_translate_element"></div>
+	<script>
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement({
+				pageLanguage: 'en',
+				layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+			}, 'google_translate_element');
+		}
+	</script>
+</body>
+</html>
