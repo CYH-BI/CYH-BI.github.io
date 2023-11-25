@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>英语单词查询</title>
-	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-	<script src="https://translate.google.com/translate_a/element.js"></script>
+	<title>CYH的个人网站</title>
 	<style>
 		body {
 			background-image: url('https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/images/sunny.jpg');
@@ -57,41 +54,4 @@
 			margin-bottom: 10px;
 		}
 	</style>
-</head>
-<body>
-	<div class="container">
-		<div class="input-group">
-			<label for="word">请输入要查询的英语单词：</label>
-			<input type="text" id="word" name="word" placeholder="请输入要查询的英语单词">
-			<button id="search">查询</button>
-		</div>
-		<div class="result" id="result"></div>
-	</div>
-	<script>
-		$(document).ready(function() {
-			$("#search").click(function() {
-				var word = $("#word").val();
-				$.ajax({
-					url: "https://fanyi.baidu.com/api/trans/vip/translate",
-					dataType: "json",
-					data: {
-						q: word,
-						from: "en",
-						to: "zh",
-						appid: "2022030500000000",
-						secretKey: "1234567890abcdef1234567890abcdef",
-						nonce: "1234567890",
-						signature: "1234567890abcdef1234567890abcdef"
-					},
-					success: function(data) {
-						var meaning = data.trans_result[0].dst;
-						var result = $("#result");
-						result.empty();
-						result.append("<h2>" + meaning + "</h2>");
-					}
-				});
-			});
-		});
-	</script>
-</body>
 </html>
